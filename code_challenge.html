@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html ng-app="todoApp">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Krossover - Code Challenge</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<script src="https://code.angularjs.org/1.5.8/angular.min.js"></script>
+		<script type="text/javascript" src="js/media.js"></script>
+	</head>
+	<body ng-app="todoApp">
+		<section class="wrapper">
+			<div id="hpWrapper">
+				<h1>Krossover - Code Challenge</h1>
+				<div class="main" ng-controller="TodoListController as todoList">
+					<div class="left" valign="top">
+						<video id="frag1" controls preload="metadata" width="854px" height="480px" poster="images/cover.jpg">
+							<source src="videos/sintel_trailer-480.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' data-original="videos/sintel_trailer-480.mp4">
+						</video>
+						<!--debug
+						<nav style="text-align: center">
+							<button style="padding:0 30px 0 30px;" id="playButton" onclick="playVideo();">&gt; P L A Y</button>
+						<nav>
+						-->
+					</div>
+					<div class="right" valign="top">
+						<div class="top">
+							<h2>Add Video Fragment</h2>
+							<form ng-submit="todoList.add()">
+								<label>Name:</label><input type="text" ng-model="todoList.todoText" placeholder="enter a name here" required><br>
+								<label>Start-Time:</label><input type="number" min="0" max="51" ng-model="todoList.startTime" required>
+								<label>End-Time:</label><input type="number" min="1" max="52" ng-model="todoList.endTime" required><br>
+								<nav style="text-align:center; padding-top:10px;">
+									<input type="submit" value="Add">
+								<nav>
+							</form>
+						</div>
+						<br>
+						<div class="bottom">
+							<h2>Video Fragment List</h2>
+							<h3>To play the video, click on fragment name or hit play button</h3>
+							<!--debug <input id="msg" type="text" value="{{todoList.msg}}">-->
+							<nav>
+								<ul>
+									<li>
+										<!--
+										<a href="" onclick="jumpToTime(0);">Full Video</a>
+										<button onclick="jumpAndPlay(0)">play</button>
+										-->
+										<a href="" ng-click="jumpAndPlayToTime(0)">Full Video</a>
+										<button ng-click="jumpAndPlayToTime(0)">play</button>
+									</li>
+									<!-- debug
+									<li><a href="" onclick="jumpToTime(10,20);">Fragment 10 - 20 (seconds)</a></li>
+									<li><a href="" onclick="jumpToTime(25,30);">Fragment 25 - 30 (seconds)</a></li>
+									-->
+									<li class="frag-item" ng-repeat="todo in todoList.todos">
+										<a href="" ng-click="jumpAndPlayToTime(todo.start,todo.end)">{{todo.text}}{{todo.start}} - {{todo.end}}</a>
+										<button ng-click="jumpAndPlayToTime(todo.start,todo.end)">play</button>&nbsp;
+										<button ng-click="remove($index)">remove</button>
+									</li>
+								<ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script type="text/javascript">
+			onload();
+		</script>
+	</body>
+</html>
